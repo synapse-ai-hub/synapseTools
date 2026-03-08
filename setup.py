@@ -49,5 +49,5 @@ setup(
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering :: Information Analysis",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.9",
 )

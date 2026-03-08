@@ -37,7 +37,7 @@ It is designed to be:
 pip install synapseTools
 ```
 
-The package targets **Python 3.8+**.
+The package targets **Python 3.9+**.
 
 If you want to install only specific feature sets you can use extras:
 
