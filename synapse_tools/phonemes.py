@@ -17,18 +17,14 @@ def phoneme(text: str, punctuation: bool = False) -> str:
     of Spanish words. It normalizes input text by removing punctuation, converting to lowercase, 
     and replacing specific character patterns with their phonetic equivalents.
 
-    Args:
-        text (str): Input Spanish text to be transformed.
-        punctuation (bool, optional): If ``True``, keeps punctuation marks (e.g. ``¿``, ``¡``,
-            commas and periods) so they can be processed later; if ``False``,
-            removes all non alphanumeric characters before applying the
-            phonetic rules. Defaults to ``False``.
-        
+    ### Args
+        - text (str): Input Spanish text to be transformed.
+        - punctuation (bool, optional): If ``True``, keeps punctuation marks (e.g. ``¿``, ``¡``, commas and periods) so they can be processed later; if ``False``, removes all non alphanumeric characters before applying the phonetic rules. Defaults to ``False``.
 
-    Returns:
-        str: A string containing the transformed phonetic representation.
+    ### Returns
+        - str: A string containing the transformed phonetic representation.
 
-    Transformations include:
+    ### Transformations include
         - Normalization: Converts text to lowercase and removes non-alphanumeric characters.
         - Removes silent "h" characters that do not affect pronunciation.
         - Phonetic rules for "c", "x", "qu", "g", "j", "v", "z", etc., to approximate pronunciation.
@@ -38,7 +34,7 @@ def phoneme(text: str, punctuation: bool = False) -> str:
         - Marks the flap "r" with `chr(638)` to distinguish it from other "r" cases.
         - Converts "ñ" to "ni", "z" to "s", and adjusts "y" depending on its position.
 
-    Examples:
+    ### Examples
         >>> phoneme("Canción y jardín.")
         'kansión i xardín'
         >>> phoneme("El que quiso jugar.")
@@ -162,36 +158,32 @@ def accent(text: str, punctuation: bool = False) -> str:
     following Spanish accentuation rules. It handles various word structures and considers 
     the length, position of vowels, and terminal characters to determine where to place accents.
 
-    Args:
-        text (str): Input Spanish text to be accented.
-        punctuation (bool, optional): If ``True``, keeps punctuation marks (for example ``¿``
-            and ``¡``) so they can be restored after accentuation; if
-            ``False``, removes all special characters before processing.
-            Defaults to ``False``.
+    ### Args
+        - text (str): Input Spanish text to be accented.
+        - punctuation (bool, optional): If ``True``, keeps punctuation marks (for example ``¿`` and ``¡``) so they can be restored after accentuation; if ``False``, removes all special characters before processing. Defaults to ``False``.
 
-    Returns:
-        str: A string with words accented based on Spanish prosodic rules.
+    ### Returns
+        - str: A string with words accented based on Spanish prosodic rules.
 
-    Main Features:
+    ### Main Features
         - Normalizes text: Converts to lowercase and removes punctuation.
         - Applies accentuation rules:
             - Words already containing accents are left unchanged.
             - Single-character words and two-character vowel-only words are handled explicitly.
-            - Longer words are processed to identify vowels requiring accents based on syllable 
-            structure and terminal characters.
+            - Longer words are processed to identify vowels requiring accents based on syllable structure and terminal characters.
         - Considers word endings:
             - Words ending in consonants (not "n", "s", or vowels) are likely acute.
             - Words ending in vowels or "n" or "s" follow standard stress patterns.
         - Multi-syllable words are processed iteratively, accentuating vowels in stressed syllables.
 
-    Examples:
+    ### Examples
         >>> accent("camino farol pasear resumen")
         'camíno faról paseár resúmen'
 
         >>> accent("canción sin acento alguno")
         'canción sin acénto algúno'
 
-    Limitations:
+    ### Limitations
         - Assumes input text adheres to standard Spanish orthography.
         - May not handle edge cases for compound or irregularly stressed words.
     """
@@ -325,53 +317,6 @@ def accent(text: str, punctuation: bool = False) -> str:
 
 
 
-# def dictionaries(text:str) -> tuple[dict[str, int], dict[str, int]]:
-#     """
-#     Generates two dictionaries from the input text: a phoneme-to-index dictionary and a phoneme frequency dictionary.
-
-#     This function processes the input text to create:
-#     1. A mapping of unique characters (phonemes) to indices, with an additional "pad" token for padding.
-#     2. A dictionary counting the frequency of each phoneme in the text.
-
-#     Args:
-#         text (str): Input text to process for phoneme mapping and frequency counting.
-
-#     Returns:
-#         tuple[dict[str, int], dict[str, int]]: A tuple containing:
-#             - phonemes_dictionary (dict[str, int]): A dictionary where keys are unique characters (phonemes) 
-#               from the text and values are their respective indices. The special key "pad" maps to 0.
-#             - phonemes_quantity (dict[str, int]): A dictionary where keys are unique characters (phonemes) 
-#               and values are the counts of their occurrences in the text.
-
-#     Features:
-#         - Creates a unique index for each phoneme based on their sorted order in the text.
-#         - Includes a "pad" token for compatibility with padding operations, assigned to index 0.
-#         - Calculates the frequency of each phoneme in the input text.
-
-#     Examples:
-#         >>> text = "hola mundo"
-#         >>> dictionaries(text)
-#         ({' ': 1, 'a': 2, 'd': 3, 'h': 4, 'l': 5, 'm': 6, 'n': 7, 'o': 8, 'u': 9, 'pad': 0},
-#         {' ': 1, 'a': 1, 'd': 1, 'h': 1, 'l': 1, 'm': 1, 'n': 1, 'o': 2, 'u': 1, 'pad': 0})
-
-#     Limitations:
-#         - Does not handle special characters or non-standard inputs explicitly; it processes all characters as-is.
-#         - Assumes text is pre-processed (e.g., lowercased and stripped of punctuation) if necessary.
-
-#     Notes:
-#         - The function creates an index starting at 1 for phonemes, reserving 0 for "pad".
-#         - Frequencies in `phonemes_quantity` are initialized to 0 and updated iteratively for each character in the text.
-#     """
-
-#     phonemes_dictionary = {k:v+1 for v,k in enumerate(sorted(set(text)))}
-#     phonemes_dictionary['pad'] = 0
-#     phonemes_quantity = {}
-#     for k in phonemes_dictionary.keys():
-#         phonemes_quantity[k] = 0
-#     for letter in text:
-#         phonemes_quantity[letter] += 1
-#     return (phonemes_dictionary, phonemes_quantity)
-
 def dictionaries(text:str, order_by_frequency:bool = True, pad:bool = True) -> tuple[dict[str, int], dict[str, int]]:
     """
     Generates two dictionaries from the input text: a phoneme-to-index dictionary and a phoneme frequency dictionary.
@@ -380,40 +325,34 @@ def dictionaries(text:str, order_by_frequency:bool = True, pad:bool = True) -> t
     1. A mapping of unique characters (phonemes) to indices, with an optional "pad" token for padding.
     2. A dictionary counting the frequency of each phoneme in the text.
 
-    Args:
-        text (str): Input text to process for phoneme mapping and frequency counting.
-        order_by_frequency (bool, optional): If True, phonemes are indexed based on descending frequency 
-                                            (more frequent phonemes get lower indices). 
-                                            If False, the indexing is based on sorted ASCII order. Defaults to True.
-        pad (bool, optional): If True, includes a "pad" token mapped to index 0 for padding operations.
-                            If False, the indexing starts at 0 with no reserved padding token. Defaults to True.
+    ### Args
+        - text (str): Input text to process for phoneme mapping and frequency counting.
+        - order_by_frequency (bool, optional): If True, phonemes are indexed based on descending frequency (more frequent phonemes get lower indices). If False, the indexing is based on sorted ASCII order. Defaults to True.
+        - pad (bool, optional): If True, includes a "pad" token mapped to index 0 for padding operations. If False, the indexing starts at 0 with no reserved padding token. Defaults to True.
 
-    Returns:
-        tuple[dict[str, int], dict[str, int]]: A tuple containing:
-            - phonemes_dictionary (dict[str, int]): A dictionary where keys are unique characters (phonemes) 
-            from the text and values are their respective indices. If `pad` is True, "pad" maps to 0.
-            - phonemes_quantity (dict[str, int]): A dictionary where keys are unique characters (phonemes) 
-            and values are the counts of their occurrences in the text. "pad" always has frequency 0 if included.
+    ### Returns
+        - tuple[dict[str, int], dict[str, int]]: A tuple containing:
+            - phonemes_dictionary (dict[str, int]): A dictionary where keys are unique characters (phonemes) from the text and values are their respective indices. If `pad` is True, "pad" maps to 0.
+            - phonemes_quantity (dict[str, int]): A dictionary where keys are unique characters (phonemes) and values are the counts of their occurrences in the text. "pad" always has frequency 0 if included.
 
-    Features:
+    ### Features
         - Supports frequency-based indexing for integration with adaptive embedding models.
         - Optionally includes a "pad" token with index 0 for padding compatibility.
         - Calculates the frequency of each phoneme in the input text.
 
-    Examples:
+    ### Examples
         >>> text = "hello world"
         >>> dictionaries(text, order_by_frequency=True, pad=True)
         ({'l': 1, 'o': 2, ' ': 3, 'd': 4, 'e': 5, 'h': 6, 'r': 7, 'w': 8, 'pad': 0},
         {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1, 'pad': 0})
 
-    Limitations:
+    ### Limitations
         - Does not handle special characters or non-standard inputs explicitly; it processes all characters as-is.
         - Assumes text is pre-processed (e.g., lowercased and stripped of punctuation) if necessary.
 
-    Notes:
+    ### Notes
         - When `pad` is True, the index 0 is reserved for "pad".
-        - When `order_by_frequency` is True, more frequent phonemes are assigned lower indices. 
-        Ties in frequency are resolved using ASCII order.
+        - When `order_by_frequency` is True, more frequent phonemes are assigned lower indices. Ties in frequency are resolved using ASCII order.
         - Frequencies in `phonemes_quantity` are initialized to 0 and updated iteratively for each character in the text.
     """
 
@@ -443,21 +382,21 @@ def phoneme_graphs(tokens:dict, quantity:dict, fig_size:tuple[int]=(8,8), color:
     This function generates a bar chart displaying the frequency of phonemes in the input data. 
     The phonemes are ordered based on their indices in the provided token dictionary.
 
-    Args:
-        tokens (dict): A dictionary mapping phonemes to their indices, used to define the order of phonemes in the plot.
-        quantity (dict): A dictionary where keys are phonemes and values are their frequencies.
-        fig_size (tuple[int], optional): A tuple specifying the size of the figure in inches (width, height). Defaults to (8, 8).
-        color (str, optional): The color of the bars in the chart, specified as a valid Matplotlib color. Defaults to 'violet'.
+    ### Args
+        - tokens (dict): A dictionary mapping phonemes to their indices, used to define the order of phonemes in the plot.
+        - quantity (dict): A dictionary where keys are phonemes and values are their frequencies.
+        - fig_size (tuple[int], optional): A tuple specifying the size of the figure in inches (width, height). Defaults to (8, 8).
+        - color (str, optional): The color of the bars in the chart, specified as a valid Matplotlib color. Defaults to 'violet'.
 
-    Returns:
-        None: The function directly displays the plot.
+    ### Returns
+        - None: The function directly displays the plot.
 
-    Features:
+    ### Features
         - Creates a DataFrame to combine phoneme frequencies, their corresponding indices, and their labels.
         - Sorts the phonemes by their order in the `tokens` dictionary to ensure consistent visualization.
         - Uses Seaborn for bar chart creation, with customization for layout.
 
-    Examples:
+    ### Examples
         >>> quantity = {'a': 10, 'e': 15, 'i': 8, 'o': 20, 'u': 5}
         >>> tokens = {'a': 1, 'e': 2, 'i': 3, 'o': 4, 'u': 5, 'pad': 0}
         >>> phoneme_graphs(quantity, tokens)
@@ -465,19 +404,19 @@ def phoneme_graphs(tokens:dict, quantity:dict, fig_size:tuple[int]=(8,8), color:
         This example will display a bar chart with the phonemes "a", "e", "i", "o", "u" sorted in the order 
         defined by the `tokens` dictionary, with frequencies as heights.
 
-    Notes:
+    ### Notes
         - The x-axis represents phonemes, and the y-axis represents their frequencies.
         - Phonemes are sorted according to the `tokens` dictionary before plotting.
         - A tight layout ensures the chart fits well within the figure dimensions.
 
-    Dependencies:
+    ### Dependencies
         - Requires Matplotlib, Seaborn, and Pandas for visualization and data handling.
 
-    Limitations:
+    ### Limitations
         - Assumes that all phonemes in the `quantity` dictionary have corresponding indices in `tokens`.
         - Does not handle missing or mismatched keys between `quantity` and `tokens`.
 
-    Customizations:
+    ### Customizations
         - You can modify `fig_size` to change the dimensions of the figure.
         - You can modify `color` to use any Matplotlib-compatible color for the bars.
     """
@@ -511,45 +450,43 @@ def embeddings(input_dim:int, output_dim:int, std:Union[int, float], inverted:bo
     This approach acts as a lightweight, data-driven regularization method, especially useful in contexts 
     with unbalanced token distributions.
 
-    Args:
-        input_dim (int): Total number of unique tokens, including padding if applicable.
-        output_dim (int): Size of the embedding vector for each token.
-        std (int or float): Scaling factor that controls the global spread of the normal distribution.
-        inverted (bool, optional): If True, variance increases linearly with the token index using 
-                                   `_std = token / (std * epsilon)`. If False, variance decreases inversely 
-                                   using `_std = std / (token * epsilon)`. Defaults to True.
-        pad (bool, optional): If True, sets the embedding for token 0 to all zeros. This is useful for padding. Defaults to True.
-        epsilon (float, optional): Small constant added to denominator to prevent division by zero or extreme values. Defaults to 0.000005.
-        seed (int, optional): Seed for the random number generator to ensure reproducibility. Defaults to 23.
+    ### Args
+        - input_dim (int): Total number of unique tokens, including padding if applicable.
+        - output_dim (int): Size of the embedding vector for each token.
+        - std (int or float): Scaling factor that controls the global spread of the normal distribution.
+        - inverted (bool, optional): If True, variance increases linearly with the token index using `_std = token / (std * epsilon)`. If False, variance decreases inversely using `_std = std / (token * epsilon)`. Defaults to True.
+        - pad (bool, optional): If True, sets the embedding for token 0 to all zeros. This is useful for padding. Defaults to True.
+        - epsilon (float, optional): Small constant added to denominator to prevent division by zero or extreme values. Defaults to 0.000005.
+        - seed (int, optional): Seed for the random number generator to ensure reproducibility. Defaults to 23.
 
-    Returns:
-        np.array: A NumPy array of shape `(input_dim, output_dim)` containing the initial embedding weights.
+    ### Returns
+        - np.array: A NumPy array of shape `(input_dim, output_dim)` containing the initial embedding weights.
 
-    Features:
+    ### Features
         - Frequency-informed initialization: higher token indices receive larger variance.
         - Compatible with Keras or PyTorch embedding layers (e.g., via `weights=[...]`).
         - Deterministic output controlled via random seed.
         - Optional zero vector initialization for padding token (index 0).
 
-    Examples:
+    ### Examples
         >>> weights = embeddings(input_dim=80, output_dim=128, std=12.0)
         >>> weights.shape
         (80, 128)
 
-    Notes:
+    ### Notes
         - This function assumes that token indices are assigned based on descending frequency: the more frequent the token, the lower its index.
         - The returned matrix is meant to be used as pretrained weights for an embedding layer, either frozen or trainable.
         - Increasing variance for rarer tokens can help prevent representational collapse, especially when few examples are available for them.
 
-    Use Cases:
+    ### Use Cases
         - **NLP**: Initializing embeddings for rare words or subwords with higher flexibility.
         - **TTS**: Creating phoneme embeddings that balance representation between frequent and infrequent phonemes.
         - **Multimodal models**: Applying variance-aware initialization to categorical inputs where some categories dominate the training data.
 
-    Dependencies:
+    ### Dependencies
         - NumPy
 
-    Limitations:
+    ### Limitations
         - No validation is done on the frequency assumption; the user must ensure the index order reflects actual token distribution.
         - Does not adapt during training unless the embedding layer is set as trainable.
     """

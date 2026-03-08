@@ -5,7 +5,7 @@
 <h1 align="center">synapseTools</h1>
 
 <p align="center">
-  <a href="./LICENSE">
+  <a href="https://github.com/synapse-ai-hub/synapseTools/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License: Apache 2.0" />
   </a>
 </p>
@@ -16,18 +16,19 @@
 
 ## Overview
 
-`synapseTools` is a small utility library maintained by **SYNAPSE AI SAS** that
-groups together tools we use every day for:
+`synapseTools` is a utility library maintained by **SYNAPSE AI SAS** that currently includes:
 
-- **Exploratory data analysis (EDA)**: quick checks for nulls, outliers, correlations and PCA views.
-- **Audio processing**: mel-spectrogram generation and visualization, ready for TTS / speech workflows.
-- **Spanish phonetics**: rule-based phoneme and accent transformations tuned for Rioplatense Spanish.
+- **Exploratory data analysis (EDA)**: functions for null detection, outlier analysis, correlation heatmaps, and PCA visualization.
+- **Audio processing**: mel-spectrogram generation and visualization for audio workflows.
+- **Spanish phonetics**: phoneme and accent transformations tailored for Rioplatense Spanish.
 
-It is designed to be:
+This is an **evolving project** designed as the foundation for a comprehensive framework to work with data, AI, and autonomous agents. We are continuously expanding the toolkit with new features and capabilities.
 
-- **Practical** – simple functions with sensible defaults.
-- **Composable** – you can plug them into your own pipelines and notebooks.
-- **Focused** – only tools we actually use in projects, without heavy deep-learning dependencies.
+Core principles:
+
+- **Practical** – simple, focused functions with sensible defaults.
+- **Composable** – integrate easily into your pipelines and notebooks.
+- **Minimal dependencies** – no heavy deep-learning frameworks required unless you opt for specific extras.
 
 ---
 
@@ -37,7 +38,7 @@ It is designed to be:
 pip install synapseTools
 ```
 
-The package targets **Python 3.9+**.
+The package targets **Python 3.8+**.
 
 If you want to install only specific feature sets you can use extras:
 
@@ -123,10 +124,10 @@ print(phoneme_text)
 
 ## Contributing
 
-If you want to contribute, see [CONTRIBUTING.md](./CONTRIBUTING.md).
+If you want to contribute, see [CONTRIBUTING.md](https://github.com/synapse-ai-hub/synapseTools/blob/main/CONTRIBUTING.md).
 
 ---
 
 ## License
 
-This project is licensed under the **Apache 2.0** license. See [LICENSE](./LICENSE) for details.
+This project is licensed under the **Apache 2.0** license. See [LICENSE](https://github.com/synapse-ai-hub/synapseTools/blob/main/LICENSE) for details.
