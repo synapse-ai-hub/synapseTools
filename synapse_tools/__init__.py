@@ -1,5 +1,5 @@
 """
-Public interface for the ``tools`` package.
+Public interface for the ``synapse_tools`` package.
 
 This package groups together utility modules for:
 

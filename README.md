@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/synapse-ai-hub/synapse-tools/main/src/LogoBlancoGrande2.png" alt="Logo synapse.ai" width="150">
+  <img src="https://raw.githubusercontent.com/synapse-ai-hub/synapseTools/main/src/LogoBlancoGrande2.png" alt="Logo synapse.ai" width="150">
 </p>
 
-<h1 align="center">synapse-tools</h1>
+<h1 align="center">synapseTools</h1>
 
 <p align="center">
   <a href="./LICENSE">
@@ -16,7 +16,7 @@
 
 ## Overview
 
-`synapse-tools` is a small utility library maintained by **SYNAPSE AI SAS** that
+`synapseTools` is a small utility library maintained by **SYNAPSE AI SAS** that
 groups together tools we use every day for:
 
 - **Exploratory data analysis (EDA)**: quick checks for nulls, outliers, correlations and PCA views.
@@ -34,7 +34,7 @@ It is designed to be:
 ## Installation
 
 ```bash
-pip install synapse-tools
+pip install synapseTools
 ```
 
 The package targets **Python 3.8+**.
@@ -43,16 +43,16 @@ If you want to install only specific feature sets you can use extras:
 
 ```bash
 # Full installation (equivalent to base install)
-pip install "synapse-tools[all]"
+pip install "synapseTools[all]"
 
 # Only EDA utilities
-pip install "synapse-tools[eda]"
+pip install "synapseTools[eda]"
 
 # Only audio / mel-spectrogram utilities
-pip install "synapse-tools[mel]"
+pip install "synapseTools[mel]"
 
 # Only phoneme / accent tools
-pip install "synapse-tools[phonemes]"
+pip install "synapseTools[phonemes]"
 ```
 
 > For reproducible environments, we recommend using `python -m venv` or a tool
@@ -62,7 +62,7 @@ pip install "synapse-tools[phonemes]"
 
 ## Modules
 
-### `tools.eda`
+### `synapse_tools.eda`
 
 Utilities for quick exploratory data analysis on `pandas.DataFrame` objects.
 
@@ -74,7 +74,7 @@ Utilities for quick exploratory data analysis on `pandas.DataFrame` objects.
 These functions are handy when you want fast, visual feedback about a dataset
 without writing a lot of boilerplate plotting code.
 
-### `tools.mel_spectrograms`
+### `synapse_tools.mel_spectrograms`
 
 Helpers for turning audio files into mel spectrograms and plotting them.
 
@@ -84,7 +84,7 @@ Helpers for turning audio files into mel spectrograms and plotting them.
 This is especially useful in speech and TTS workflows where you need a
 repeatable way to extract and inspect mel features.
 
-### `tools.phonemes`
+### `synapse_tools.phonemes`
 
 Rule-based utilities focused on **Rioplatense Spanish** (Argentina / Uruguay).
 
@@ -103,7 +103,7 @@ you often need custom tokenization and embeddings.
 
 ```python
 import pandas as pd
-from tools import nulls, outliers, heatmap_correlation, load_audio_to_mel, graph_mel_spectrogram, phoneme
+from synapse_tools import nulls, outliers, heatmap_correlation, load_audio_to_mel, graph_mel_spectrogram, phoneme
 
 # EDA
 df = pd.read_csv("data.csv")

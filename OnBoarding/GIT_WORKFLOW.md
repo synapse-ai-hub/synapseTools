@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/synapse-ai-hub/synapse-tools/main/src/LogoBlancoGrande2.png" alt="Logo synapse.ai" width="80">
+  <img src="https://raw.githubusercontent.com/synapse-ai-hub/synapseTools/main/src/LogoBlancoGrande2.png" alt="Logo synapse.ai" width="80">
 </p>
 
 ---
 
-## Recommended Git workflow for `synapse-tools`
+## Recommended Git workflow for `synapseTools`
 
 This document explains how we work with Git in this project to keep history clean, enable collaboration without conflicts, and allow anyone to perform merges (there may be a designated person, but we want the process to be accessible).
 

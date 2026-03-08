@@ -1,20 +1,20 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/synapse-ai-hub/synapse-tools/main/src/LogoBlancoGrande2.png" alt="Logo synapse.ai" width="80">
+  <img src="https://raw.githubusercontent.com/synapse-ai-hub/synapseTools/main/src/LogoBlancoGrande2.png" alt="Logo synapse.ai" width="80">
 </p>
 
 ---
 
 # Quick onboarding
 
-Welcome to the `synapse-tools` project. Minimal steps to get your environment ready and contribute.
+Welcome to the `synapseTools` project. Minimal steps to get your environment ready and contribute.
 
 ---
 
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/synapse-ai-hub/synapse-tools.git
-cd synapse-tools
+git clone https://github.com/synapse-ai-hub/synapseTools.git
+cd synapseTools
 ```
 
 ---

@@ -7,7 +7,7 @@ ROOT = Path(__file__).parent
 
 
 setup(
-    name="synapse-tools",
+    name="synapseTools",
     version="0.1.0",
     description=(
         "Utility toolkit for data exploration, audio mel-spectrogram generation, "
@@ -17,7 +17,7 @@ setup(
     long_description_content_type="text/markdown",
     author="SYNAPSE AI SAS",
     author_email="servicios@groupsynapseai.com",
-    url="https://github.com/synapse-ai-labs/synapse-tools",
+    url="https://github.com/synapse-ai-hub/synapseTools",
     packages=find_packages(exclude=("tests", "tests.*", "examples", "examples.*")),
     install_requires=[
         "numpy>=1.24",

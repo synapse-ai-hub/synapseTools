@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for wanting to contribute to `synapse-tools`. Keep it simple:
+Thanks for wanting to contribute to `synapseTools`. Keep it simple:
 
 1. **Branch**: Work in `feature/...`, `fix/...` or `chore/...`. Never push directly to `main`.
 2. **Commits**: Small, atomic commits. Messages in imperative: "Add null check for empty column", "Fix typo in phoneme docstring".
