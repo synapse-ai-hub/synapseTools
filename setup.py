@@ -8,7 +8,7 @@ ROOT = Path(__file__).parent
 
 setup(
     name="synapseTools",
-    version="0.1.0",
+    version="0.1.1",
     description=(
         "Utility toolkit for data exploration, audio mel-spectrogram generation, "
         "and Spanish phonetic processing."
