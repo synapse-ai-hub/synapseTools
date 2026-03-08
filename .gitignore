@@ -208,3 +208,7 @@ __marimo__/
 
 # venv
 .tools/
+
+GITHUB_WORKFLOW/
+
+.github/workflows/publish-pypi.yml
