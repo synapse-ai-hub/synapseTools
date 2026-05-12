@@ -83,7 +83,23 @@ def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive S
         - return_dict (bool): Whether to return the statistics as a dictionary. Defaults to False.
 
     ### Returns
-        - dict or None: If `return_dict` is True, returns a dictionary with statistics. Otherwise, returns None.
+        - dict or None: If `return_dict` is True, returns a dictionary with the following statistics:
+            - 'min': Minimum value of the column.
+            - 'max': Maximum value of the column.
+            - 'mean': Mean of the column.
+            - 'median': Median of the column.
+            - 'mode': Mode of the column.
+            - 'Q1': First quartile (25th percentile).
+            - 'Q2': Second quartile (50th percentile/median).
+            - 'Q3': Third quartile (75th percentile).
+            - 'Q4': Fourth quartile (100th percentile).
+            - 'STD': Standard deviation.
+            - 'IQR': Interquartile range (Q3 - Q1).
+            - 'Top Limit Outliers': Upper bound for outliers (Q3 + 1.5*IQR).
+            - 'Bottom Limit Outliers': Lower bound for outliers (Q1 - 1.5*IQR).
+            - 'Total Data': Total number of rows in the DataFrame.
+            - 'Outliers Quantity': Number of detected outliers.
+          Otherwise, returns None.
 
     ### Features
         - Converts the column to numeric, coercing non-numeric values to NaN.
@@ -185,6 +201,7 @@ def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive S
 
         if return_dict:
             return {
+                'min': round(min,4), 'max': round(max,4),
                 'mean': round(mean,4), 'median': round(median,4), 'mode': round(mode,4),
                 'Q1': round(q1,4), 'Q2': round(q2,4), 'Q3': round(q3,4), 'Q4': round(q4,4),
                 'STD': round(std,4), 'IQR': round(iqr,4),
