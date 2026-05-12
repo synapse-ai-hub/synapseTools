@@ -28,7 +28,7 @@ Core principles:
 
 - **Practical** – simple, focused functions with sensible defaults.
 - **Composable** – integrate easily into your pipelines and notebooks.
-- **Minimal dependencies** – no heavy deep-learning frameworks required unless you opt for specific extras.
+
 
 ---
 

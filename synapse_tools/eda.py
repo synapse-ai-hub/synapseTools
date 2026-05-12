@@ -61,7 +61,7 @@ def nulls(data:pd.DataFrame, column:Union[str, int]) -> None:
 
 
 
-def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive Statistics", color:str='violet', fig_size:tuple[int, int]=(15,5), visualization:bool=True, return_dict:bool=False) -> Union[dict, None]:
+def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive Statistics", color:str='violet', fig_size:tuple[int, int]=(15,5), visualization:bool=True, output_dir:str='', name:str='Outliers', save:bool=False, return_dict:bool=False) -> Union[dict, None]:
     """
     Analyzes numerical outliers in a specified column of a DataFrame, visualizing its distribution, 
     boxplot, and basic statistics.
@@ -73,11 +73,17 @@ def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive S
     ### Args
         - data (pd.DataFrame): The input DataFrame containing the data to analyze.
         - column (str or int): The name of the column to analyze. Must contain numerical data.
+        - title (str): The title of the statistics subplot. Defaults to "Descriptive Statistics".
         - color (str): The color for the histogram and boxplot. Defaults to 'violet'.
-        - fig_size (tuple[int, int]): The size of the figure for the visualizations. Defaults to (15, 4).
+        - fig_size (tuple[int, int]): The size of the figure for the visualizations. Defaults to (15, 5).
+        - visualization (bool): Whether to display the visualization. Defaults to True.
+        - output_dir (str): The directory where the image will be saved, if `save` is True. Defaults to an empty string (current working directory).
+        - name (str): The name of the saved image file (without extension). Defaults to 'Outliers'.
+        - save (bool): Whether to save the visualization as an image file. Defaults to False.
+        - return_dict (bool): Whether to return the statistics as a dictionary. Defaults to False.
 
     ### Returns
-        - None: The function generates plots and prints statistical metrics directly.
+        - dict or None: If `return_dict` is True, returns a dictionary with statistics. Otherwise, returns None.
 
     ### Features
         - Converts the column to numeric, coercing non-numeric values to NaN.
@@ -91,7 +97,10 @@ def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive S
          import pandas as pd
          df = pd.DataFrame({'A': [1, 2, 2, 3, 100]})
          outliers(df, column='A')
-        
+         
+         To save the visualization:
+         outliers(df, column='A', output_dir='./plots', name='outliers_example', save=True)
+
         For multiple columns:
          for column in df.select_dtypes(include=['number']).columns:
         ...     outliers(df, column)
@@ -118,16 +127,6 @@ def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive S
 
     data[column] = pd.to_numeric(data[column], errors='coerce')
 
-    
-    if visualization:
-        fig, axes = plt.subplots(1, 3, figsize=fig_size) 
-        fig.suptitle(f'Analysis for column {column}')
-        sns.histplot(data=data, x=column, kde=True, ax=axes[0], color=color)
-        axes[0].set_title('Distribution')
-        sns.boxplot(data=data, y=column, ax=axes[1], color=color)
-        axes[1].set_title('Boxplot')
-
-  
     serie = data[column].dropna()
     if not serie.empty:
         min = np.min(serie)
@@ -146,7 +145,14 @@ def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive S
         
         oq = serie[(serie > tlo) | (serie < blo)].count()
 
-        if visualization:
+        if visualization or save:
+            fig, axes = plt.subplots(1, 3, figsize=fig_size) 
+            fig.suptitle(f'Analysis for column {column}')
+            sns.histplot(data=data, x=column, kde=True, ax=axes[0], color=color)
+            axes[0].set_title('Distribution')
+            sns.boxplot(data=data, y=column, ax=axes[1], color=color)
+            axes[1].set_title('Boxplot')
+
             step = 0.082
             y = 0.9
             axes[2].text(0.1, y, f'Min: {min:.4f}', transform=axes[2].transAxes); y -= step
@@ -168,7 +174,13 @@ def outliers(data:pd.DataFrame, column:Union[str, int], title:str="Descriptive S
             axes[2].set_title(title)
             axes[2].axis('off')  
             plt.tight_layout()
-            plt.show()
+
+        if save:
+            output_path = os.path.join(output_dir, f'{name}.png')
+            plt.savefig(output_path)
+        if visualization:
+            plt.show() 
+        if visualization or save:
             plt.close(fig)
 
         if return_dict:
